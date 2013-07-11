@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "none"
+    "url": "https://github.com/steveworkman/grunt-yslow-test"
   },
   "bugs": {
     "url": ""
