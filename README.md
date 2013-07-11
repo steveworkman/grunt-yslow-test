@@ -26,28 +26,29 @@ In your project's Gruntfile, add a section named `yslow_test` to the data object
 grunt.initConfig({
   yslow_test: {
     options: {
-      // Task-specific options go here.
+      info: "grade",
+      format: "junit",
+      urls: ['http://google.com'],
+      reports: ['test/reports/yslow.xml']
     },
     your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+      files: []
+    }
+  }
 })
 ```
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.urls
+An array of URLs to visit
 
-A string value that is used to do something with whatever.
+#### options.reports
+An array of files to write output reports into. These match the URLs on array index. If no reports are found, a file will not be written
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+The options mirror those available in the yslow.js plugin. Please see http://yslow.org/phantomjs/ for parameters.
 
-A string value that is used to do something else with whatever else.
+*Please note, as this script uses URLs and not local files, Grunt's File API does not work. However, it is still mandatory, so leave it blank*
 
 ### Usage Examples
 
@@ -57,33 +58,18 @@ In this example, the default options are used to do something with whatever. So 
 ```js
 grunt.initConfig({
   yslow_test: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  yslow_test: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      info: "grade",
+      format: "junit",
+      urls: ['http://google.com'],
+      reports: ['test/reports/yslow.xml']
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    your_target: {
+      files: []
+    }
+  }
 })
 ```
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+0.1.0: First release
