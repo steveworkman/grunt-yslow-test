@@ -58,14 +58,13 @@ In this example, the default options are used to do something with whatever. So 
 ```js
 grunt.initConfig({
   yslow_test: {
-    options: {
-      info: "grade",
-      format: "junit",
-      urls: ['http://google.com'],
-      reports: ['test/reports/yslow.xml']
-    },
-    your_target: {
-      files: []
+    my_site: {
+      options: {
+        info: "grade",
+        format: "junit",
+        urls: ['http://google.com'],
+        reports: ['test/reports/yslow.xml']
+      }
     }
   }
 })

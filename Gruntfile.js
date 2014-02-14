@@ -37,8 +37,7 @@ module.exports = function(grunt) {
           urls: ['http://localhost:8080'],
           reports: ['test/reports/yslow.xml'],
           yslow_src: './tasks/lib/yslow.js'
-        },
-        files: []
+        }
       }
     },
 
