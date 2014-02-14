@@ -39,6 +39,10 @@ exports.init = function(grunt) {
       command += ' -ch ' + options.headers;
     }
 
+    if(options.cnds) {
+      command += ' --cdns "' + options.cdns.join(',') + '"';
+    }
+
     command += " " + url;
     grunt.log.write("Command: " + command);
 
