@@ -3,8 +3,10 @@ exports.init = function(grunt) {
       path = require('path');
   exports.yslow = function(url, report, options, callback) {
 
-    var pathToYSlow = path.resolve('./node_modules/grunt-yslow-test/tasks/lib/yslow.js'),
-        command = 'phantomjs '+pathToYSlow,
+    // options.yslow_src only expected to be used for testing only
+
+    var pathToYSlow = path.resolve(options.yslow_src || './node_modules/grunt-yslow-test/tasks/lib/yslow.js'),
+        command = 'phantomjs '+ pathToYSlow,
         exec = require('child_process').exec;
 
     // Add options documented in the following web site:

@@ -1,6 +1,6 @@
 /*
  * grunt-yslow-test
- * 
+ *
  *
  * Copyright (c) 2013 Steve Workman
  * Licensed under the none license.
@@ -35,7 +35,8 @@ module.exports = function(grunt) {
           info: "grade",
           format: "junit",
           urls: ['http://localhost:8080'],
-          reports: ['test/reports/yslow.xml']
+          reports: ['test/reports/yslow.xml'],
+          yslow_src: './tasks/lib/yslow.js'
         },
         files: []
       }
