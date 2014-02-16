@@ -25,14 +25,13 @@ In your project's Gruntfile, add a section named `yslow_test` to the data object
 ```js
 grunt.initConfig({
   yslow_test: {
-    options: {
-      info: "grade",
-      format: "junit",
-      urls: ['http://google.com'],
-      reports: ['test/reports/yslow.xml']
-    },
-    your_target: {
-      files: []
+    homepage: {
+      options: {
+        info: "grade",
+        format: "junit",
+        urls: ['http://google.com'],
+        reports: ['test/reports/yslow.xml']
+      }
     }
   }
 })
@@ -48,24 +47,21 @@ An array of files to write output reports into. These match the URLs on array in
 
 The options mirror those available in the yslow.js plugin. Please see http://yslow.org/phantomjs/ for parameters.
 
-*Please note, as this script uses URLs and not local files, Grunt's File API does not work. However, it is still mandatory, so leave it blank*
+*Please note, as this script uses URLs and not local files, consider using a static grunt server [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect)*
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
 ```js
 grunt.initConfig({
   yslow_test: {
-    options: {
-      info: "grade",
-      format: "junit",
-      urls: ['http://google.com'],
-      reports: ['test/reports/yslow.xml']
-    },
-    your_target: {
-      files: []
+    search_engines: {
+      options: {
+        info: "grade",
+        format: "junit",
+        urls: ['http://google.com', 'http://yahoo.com'],
+        reports: ['test/reports/google.xml', 'test/reports/yahoo.xml']
+      }
     }
   }
 })
@@ -73,3 +69,4 @@ grunt.initConfig({
 
 ## Release History
 0.1.0: First release
+0.1.1: Fail task on failures
