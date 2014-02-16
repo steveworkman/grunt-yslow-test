@@ -44,28 +44,36 @@ exports.init = function(grunt) {
     }
 
     command += " " + url;
-    grunt.log.write("Command: " + command);
+    grunt.log.writeln("Command: " + command);
 
     function puts(error, stdout, stderr) {
+      if(stdout.match(/^FAIL/)) {
+        callback('Something went wrong, the report cannot be parsed.');
+      }
+
       grunt.log.write('\nRunning YSlow on "' + url + '":\n');
-      
+
       if (report) {
         grunt.log.write("Saving report to "+report);
         grunt.file.write(report, stdout);
       } else {
         grunt.log.write(stdout);
       }
-      
-      if ( error !== null ) {
-        callback(error);
-      } else {
-        callback();
+
+      switch(options.format)
+      {
+        case 'junit':
+          var parser = require('./report_parsers/junit_report_parser').init(grunt);
+          error = parser.parse(stdout);
+          break;
       }
+
+      callback(error);
     }
 
     exec(command, puts);
-    
+
   };
-  
+
   return exports;
 };

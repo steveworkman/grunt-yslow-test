@@ -34,9 +34,10 @@ module.exports = function(grunt) {
         options: {
           info: "grade",
           format: "junit",
-          urls: ['http://localhost:8080'],
+          urls: ['http://localhost:8000'],
           reports: ['test/reports/yslow.xml'],
-          yslow_src: './tasks/lib/yslow.js'
+          yslow_src: './tasks/lib/yslow.js',
+          threshold: '\'{"yfavicon": 1, "yexternal": -1}\''
         }
       }
     },
@@ -45,6 +46,10 @@ module.exports = function(grunt) {
     nodeunit: {
       tests: ['test/*_test.js']
     },
+
+    connect: {
+      uses_defaults: {}
+    }
 
   });
 
@@ -55,10 +60,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'yslow_test', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'connect', 'yslow_test', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
