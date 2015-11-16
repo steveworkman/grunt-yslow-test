@@ -3,8 +3,12 @@ exports.init = function(grunt) {
       path = require('path');
   exports.yslow = function(url, report, options, callback) {
 
+    if (options.args) {
+      phantomjs_args += options.args;
+    }
+
     var pathToYSlow = path.resolve('./node_modules/grunt-yslow-test/tasks/lib/yslow.js'),
-        command = 'phantomjs '+pathToYSlow,
+        command = 'phantomjs '+pathToYSlow+phantomjs_args,
         exec = require('child_process').exec;
 
     // Add options documented in the following web site:
@@ -42,14 +46,14 @@ exports.init = function(grunt) {
 
     function puts(error, stdout, stderr) {
       grunt.log.write('\nRunning YSlow on "' + url + '":\n');
-      
+
       if (report) {
         grunt.log.write("Saving report to "+report);
         grunt.file.write(report, stdout);
       } else {
         grunt.log.write(stdout);
       }
-      
+
       if ( error !== null ) {
         callback(error);
       } else {
@@ -58,8 +62,8 @@ exports.init = function(grunt) {
     }
 
     exec(command, puts);
-    
+
   };
-  
+
   return exports;
 };
